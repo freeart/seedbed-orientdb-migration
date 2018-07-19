@@ -1,0 +1,23 @@
+{
+  "name": "seedbed-orientdb-migration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeart/seedbed-orientdb-migration.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freeart/seedbed-orientdb-migration/issues"
+  },
+  "homepage": "https://github.com/freeart/seedbed-orientdb-migration#readme",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "async": "^2.6.1"
+  }
+}
