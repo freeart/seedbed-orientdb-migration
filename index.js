@@ -25,7 +25,7 @@ module.exports = function () {
 				for (const [table, timelog] of Object.entries(migrationLog)) {
 					for (const [timestamp, sqlLog] of Object.entries(timelog)) {
 						migrationUpdate[table] = migrationUpdate[table] || {};
-						if (timestamp > schema[table]) {
+						if (parseInt(timestamp, 10) > parseInt(schema[table].version, 10) || schema[table].version === null) {
 							migrationUpdate[table][timestamp] = sqlLog;
 						}
 					}
@@ -37,9 +37,9 @@ module.exports = function () {
 					async.eachOfSeries(timelog, (sqls, timestamp, cb) => {
 						sqls.push(`ALTER CLASS ${table} CUSTOM version=${timestamp}`);
 						async.eachSeries(sqls, (sql, cb) => {
-							this.orientDB.query(`ALTER CLASS ${table} CUSTOM version=:version`).then((res) => cb(null, res)).catch((err) => cb(err));
-						});
-					});
+							this.orientDB.query(sql).then((res) => cb(null, res)).catch((err) => cb(err));
+						}, (err) => cb(err));
+					}, (err) => cb(err));
 				}, (err) => cb(err));
 			}
 		}, (err) => {
