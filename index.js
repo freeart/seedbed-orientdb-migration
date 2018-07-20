@@ -25,7 +25,7 @@ module.exports = function () {
 				for (const [table, timelog] of Object.entries(migrationLog)) {
 					for (const [timestamp, sqlLog] of Object.entries(timelog)) {
 						migrationUpdate[table] = migrationUpdate[table] || {};
-						if (parseInt(timestamp, 10) > parseInt(schema[table].version, 10) || schema[table].version === null) {
+						if (!schema[table] || parseInt(timestamp, 10) > parseInt(schema[table].version, 10) || schema[table].version === null) {
 							migrationUpdate[table][timestamp] = sqlLog;
 						}
 					}
